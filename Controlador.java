@@ -67,5 +67,39 @@ public class Controlador {
     public List<Contenido> getTodosLosContenidos() {
         return todosLosContenidos;
     }
+
+    //funciones generales
+    public ArrayList<Contenido> clasificarContenido(String categoria){
+        ArrayList<Contenido> clasificados = new ArrayList<>();
+        for (Contenido c : todosLosContenidos) {
+            if (c.getCategoria().equalsIgnoreCase(categoria)) {
+                clasificados.add(c);
+            }
+        }
+        return clasificados;
+    }
+    public ArrayList<Contenido> filtrarContenido(String tipo){
+        ArrayList<Contenido> filtrados = new ArrayList<>();
+        for (Contenido c : todosLosContenidos) {
+            // obtiene el nombre de la clase del objeto (ejemplo: "Articulo")
+            String tipoContenido = c.getClass().getSimpleName();
+            if (tipoContenido.equalsIgnoreCase(tipo)) {
+                filtrados.add(c);
+            }
+        }
+        return filtrados;
+    }
+    public Contenido buscarContenido(String palabra){
+        for (Contenido c : todosLosContenidos) {
+            if (c.getTitulo().toLowerCase().contains(palabra.toLowerCase()) ||
+                c.getAutor().toLowerCase().contains(palabra.toLowerCase()) ||
+                c.getEtiqueta().toLowerCase().contains(palabra.toLowerCase())) {
+                    //devuelve el primero que encuentra
+                return c;
+            }
+        }
+        return null;
+    }
+
 }
 
